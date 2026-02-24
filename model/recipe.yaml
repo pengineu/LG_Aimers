@@ -1,0 +1,20 @@
+default_stage:
+  default_modifiers:
+    QuantizationModifier:
+      targets: [Linear]
+      ignore: [embed_tokens, lm_head, model.layers.0, model.layers.1, model.layers.28, model.layers.29]
+      scheme: W8A8
+      kv_cache_scheme:
+        num_bits: 8
+        type: float
+        symmetric: true
+        group_size: null
+        strategy: !!python/object/apply:compressed_tensors.quantization.quant_args.QuantizationStrategy [
+          tensor]
+        block_structure: null
+        dynamic: false
+        actorder: null
+        scale_dtype: null
+        zp_dtype: null
+        observer: minmax
+        observer_kwargs: {}
